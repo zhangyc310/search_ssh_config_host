@@ -2,6 +2,10 @@ from tkinter import *
 from tkinter.ttk import *
 import pyperclip3
 
+# 程序的作用是，自动解析 .ssh/config文件，
+# tree 可以排序
+# 单击会复制 ssh your_host_config 到剪贴板；
+# 右键单击，会Term中运行 ssh your_host_config
 class Win:
     def __init__(self):
         self.root = self.__win()
@@ -11,7 +15,7 @@ class Win:
         # self.tk_list_box_listbox = self.__tk_list_box_listbox()
         self.ttk_tree_content = self.__ttk_tree()
         results = self.getSSHConfg()
-        self.addHost2Tree(results)
+        self.updateHost2Tree(results)
         self.ttk_tree_content.bind('<ButtonRelease-1>', self.treeviewClick)
         self.ttk_tree_content.bind('<ButtonRelease-2>', self.treeviewDoubleClick)
         self.tk_button_search_btn.bind('<Button-1>', self.search_Host)
@@ -90,7 +94,7 @@ class Win:
         tree.place(x=40, y=60, width=528, height=428)
         return tree
 
-    def addHost2Tree(self,hostDatas):
+    def updateHost2Tree(self,hostDatas):
 
         for rs in hostDatas:
             print(rs)
@@ -203,7 +207,7 @@ class Win:
         for search_rs in rs:
             print("ssh", search_rs["Host"], " \t,", search_rs)
         self.clearTree()
-        self.addHost2Tree(rs)
+        self.updateHost2Tree(rs)
 
 if __name__ == "__main__":
     win = Win()
