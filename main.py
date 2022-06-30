@@ -2,7 +2,8 @@ from tkinter import *
 from tkinter.ttk import *
 import pyperclip3
 
-# 20220630 单击复制后，window的title会提示复制的命令
+# 20220630v2 左键单击改双击了
+# 20220630v1 单击复制后，window的title会提示复制的命令
 # 程序的作用是，自动解析 .ssh/config文件，
 # tree 可以排序
 # 单击会复制 ssh your_host_config 到剪贴板；
@@ -18,7 +19,7 @@ class Win:
         self.ttk_tree_content = self.__ttk_tree()
         results = self.getSSHConfg()
         self.updateHost2Tree(results)
-        self.ttk_tree_content.bind('<ButtonRelease-1>', self.treeviewClick)
+        self.ttk_tree_content.bind('<Double-Button-1>', self.treeviewClick)
         self.ttk_tree_content.bind('<ButtonRelease-2>', self.treeviewDoubleClick)
         self.tk_button_search_btn.bind('<Button-1>', self.search_Host)
         self.tk_input_search_content.bind('<Key-Return>', self.search_Host)
