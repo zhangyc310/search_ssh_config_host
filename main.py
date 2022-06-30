@@ -2,10 +2,12 @@ from tkinter import *
 from tkinter.ttk import *
 import pyperclip3
 
+# 20220630 单击复制后，window的title会提示复制的命令
 # 程序的作用是，自动解析 .ssh/config文件，
 # tree 可以排序
 # 单击会复制 ssh your_host_config 到剪贴板；
 # 右键单击，会Term中运行 ssh your_host_config
+
 class Win:
     def __init__(self):
         self.root = self.__win()
@@ -179,13 +181,15 @@ class Win:
             item_text =  self.ttk_tree_content.item(item, "values")
             print(item_text[1])  # 输出所选行的第一列的值
             pyperclip3.copy("ssh "+item_text[1])
+            self.root.title("复制—— ssh " + item_text[1])
 
     def treeviewDoubleClick(self,event):  # 单击
-        print('双击')
+        print('右键单击')
         for item in self.ttk_tree_content.selection():
             item_text =  self.ttk_tree_content.item(item, "values")
             print(item_text[1])  # 输出所选行的第一列的值
             pyperclip3.copy("ssh "+item_text[1])
+            # self.root.title("复制—— ssh "+item_text[1])
 
     def search_Host(self ,event):
         所有结果列表2 = self.getSSHConfg()
